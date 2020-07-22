@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShowroomManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="brand">
+    <Key>
+      <PropertyRef Name="brand_id" />
+    </Key>
+    <Property Name="brand_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="brand_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="brand_country" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="brand_description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="Self.FK_product_brand" FromRole="brand" ToRole="product" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customer_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_id" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="Self.FK_customer_product" FromRole="customer" ToRole="product" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_order_customer" FromRole="customer" ToRole="order" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="employee_birthday" Type="DateTime" Precision="0" />
+    <Property Name="employee_salary" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="employee_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="employee_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="showroom_id" Type="Int32" />
+    <NavigationProperty Name="Showroom" Relationship="Self.FK_employee_Showroom" FromRole="employee" ToRole="Showroom" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_order_employee" FromRole="employee" ToRole="order" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="order_description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="order_time" Type="DateTime" Precision="3" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="customer_id" Type="Int32" Nullable="false" />
+    <Property Name="employee_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_order_customer" FromRole="order" ToRole="customer" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_order_employee" FromRole="order" ToRole="employee" />
+    <NavigationProperty Name="product" Relationship="Self.FK_order_product" FromRole="order" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="product_description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="brand_id" Type="Int32" />
+    <Property Name="showroom_id" Type="Int32" />
+    <NavigationProperty Name="brand" Relationship="Self.FK_product_brand" FromRole="product" ToRole="brand" />
+    <NavigationProperty Name="customers" Relationship="Self.FK_customer_product" FromRole="product" ToRole="customer" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_order_product" FromRole="product" ToRole="order" />
+    <NavigationProperty Name="Showroom" Relationship="Self.FK_product_Showroom" FromRole="product" ToRole="Showroom" />
+  </EntityType>
+  <EntityType Name="Showroom">
+    <Key>
+      <PropertyRef Name="showroom_id" />
+    </Key>
+    <Property Name="showroom_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="showroom_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="showroom_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="showroom_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employees" Relationship="Self.FK_employee_Showroom" FromRole="Showroom" ToRole="employee" />
+    <NavigationProperty Name="products" Relationship="Self.FK_product_Showroom" FromRole="Showroom" ToRole="product" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_product_brand">
+    <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="brand">
+        <PropertyRef Name="brand_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="brand_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customer_product">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="customer" Type="Self.customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="customer">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employee_Showroom">
+    <End Role="Showroom" Type="Self.Showroom" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Showroom">
+        <PropertyRef Name="showroom_id" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="showroom_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_product">
+    <End Role="product" Type="Self.product" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_Showroom">
+    <End Role="Showroom" Type="Self.Showroom" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Showroom">
+        <PropertyRef Name="showroom_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="showroom_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShowroomManagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="brands" EntityType="Self.brand" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="orders" EntityType="Self.order" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="Showrooms" EntityType="Self.Showroom" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_product_brand" Association="Self.FK_product_brand">
+      <End Role="brand" EntitySet="brands" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customer_product" Association="Self.FK_customer_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="customer" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_customer" Association="Self.FK_order_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employee_Showroom" Association="Self.FK_employee_Showroom">
+      <End Role="Showroom" EntitySet="Showrooms" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_employee" Association="Self.FK_order_employee">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_product" Association="Self.FK_order_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_Showroom" Association="Self.FK_product_Showroom">
+      <End Role="Showroom" EntitySet="Showrooms" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<SHOWROOMMANAGER.Models.employee>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-bottom : 20px ; text-align : center">Danh sách nhân viên</h2>
+
+<p>
+    @Html.ActionLink("Add New Employee", "Create")
+
+
+</p>
+@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+{
+    <p style="padding : 10px 0">
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+            @Html.ActionLink("↓", "Index", new { sortOrder = "name_desc" })
+            @Html.ActionLink("↑", "Index", new { sortOrder = "name" })
+        </th>
+        <th>
+            Date Of Birth
+            @Html.ActionLink("↓", "Index", new { sortOrder = "date_desc" })
+            @Html.ActionLink("↑", "Index", new { sortOrder = "date" })
+        </th>
+        <th>
+            Salary
+            @Html.ActionLink("↓", "Index", new { sortOrder = "salary_desc" })
+            @Html.ActionLink("↑", "Index", new { sortOrder = "salary" })
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Show
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showroom.showroom_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.employee_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.employee_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.employee_id })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

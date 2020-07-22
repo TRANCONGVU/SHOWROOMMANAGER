@@ -1,0 +1,67 @@
+﻿@model SHOWROOMMANAGER.Models.order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.order_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.customer_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.customer_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employee.employee_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employee.employee_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.product_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.order_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

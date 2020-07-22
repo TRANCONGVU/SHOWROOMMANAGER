@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SHOWROOMMANAGER.Models.Showroom>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.showroom_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.showroom_phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.showroom_address)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.showroom_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.showroom_phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.showroom_address)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.showroom_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.showroom_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.showroom_id })
+        </td>
+    </tr>
+}
+
+</table>
