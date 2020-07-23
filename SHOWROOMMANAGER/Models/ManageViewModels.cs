@@ -5,6 +5,13 @@ using Microsoft.Owin.Security;
 
 namespace SHOWROOMMANAGER.Models
 {
+    public class HomePageViewModel
+    {
+        public IEnumerable<product> Products { get; set; }
+        public IEnumerable<brand> Brands { get; set; }
+
+        public IEnumerable<Showroom> Showrooms { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

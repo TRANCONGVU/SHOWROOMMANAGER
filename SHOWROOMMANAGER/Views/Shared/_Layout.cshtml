@@ -171,9 +171,10 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class=" has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                        <li class=" has-sub" style="display:flex">
+                            <a class="js-arrow d-flex"  >
+                                <i class="fas fa-tachometer-alt"></i>
+                                @Html.ActionLink("Dasboard", "Index", "home")
                             </a>                            
                         </li>
                         <li style="display:flex">
