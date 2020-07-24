@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -36,7 +37,28 @@ namespace SHOWROOMMANAGER.Controllers
             return View();
         }
 
-        public ActionResult Contact(int id)
+        public ActionResult Contact(int? id)
+        {
+            ViewBag.product_id = new SelectList(db.products, "product_id", "product_name");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact([Bind(Include = "customer_id,customer_name,customer_address,customer_phone,customer_email,product_id")] customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.customers.Add(customer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.product_id = new SelectList(db.products, "product_id", "product_name", customer.product_id);
+            return View(customer);
+        }
+
+        public ActionResult showroom()
         {
             return View();
         }
