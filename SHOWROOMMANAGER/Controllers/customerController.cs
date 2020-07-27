@@ -170,5 +170,32 @@ namespace SHOWROOMMANAGER.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult makeOrder(int p, int c)
+        {
+            product product = db.products.Find(p);
+            customer customer = db.customers.Find(c);
+            if(product == null)
+            {
+                ViewBag.customer_id = new SelectList(db.customers, "customer_id", "customer_name");
+            }
+            else
+            {
+                ViewBag.customer_id = new SelectList(db.customers, "customer_id", "customer_name", customer.customer_id);
+            }
+
+            if (customer == null)
+            {
+                ViewBag.product_id = new SelectList(db.products, "product_id", "product_name");
+            }
+            else
+            {
+                ViewBag.product_id = new SelectList(db.products, "product_id", "product_name", product.product_id);
+            }
+
+            ViewBag.employee_id = new SelectList(db.employees, "employee_id", "employee_name");
+           
+            return View("../order/Create");
+        }
     }
 }

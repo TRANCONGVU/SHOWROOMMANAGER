@@ -12,6 +12,13 @@ namespace SHOWROOMMANAGER.Models
 
         public IEnumerable<Showroom> Showrooms { get; set; }
     }
+
+    public class orderParam
+    {
+        public IEnumerable<product> Products { get; set; }
+        public IEnumerable<customer> customers { get; set; }
+      
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

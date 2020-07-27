@@ -37,10 +37,11 @@ namespace SHOWROOMMANAGER.Controllers
             return View();
         }
 
-        public ActionResult Contact(int? id)
+        public ActionResult Contact(int id)
         {
-            ViewBag.product_id = new SelectList(db.products, "product_id", "product_name");
-            return View();
+            product product = db.products.Find(id);
+            ViewBag.product_id = new SelectList(db.products, "product_id", "product_name", product.product_id);
+            return View();            
         }
 
         [HttpPost]

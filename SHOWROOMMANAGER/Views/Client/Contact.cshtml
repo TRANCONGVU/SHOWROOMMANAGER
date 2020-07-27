@@ -62,9 +62,11 @@
 
                         <div class="form-group col-md-12">
                             <h6 style="color : black">Products of Interest</h6>
-                            <div class="">
-                                @Html.DropDownList("product_id", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+                            <div class="">                               
+                               
+                                    @Html.DropDownList("product_id", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+                               
                             </div>
                         </div>
 

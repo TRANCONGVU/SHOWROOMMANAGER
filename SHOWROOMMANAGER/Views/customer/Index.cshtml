@@ -64,7 +64,8 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.customer_id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.customer_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.customer_id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.customer_id }) |
+                @Html.ActionLink("Make Order", "makeOrder", new { p = item.product_id , c = item.customer_id },null )
             </td>
         </tr>
     }
