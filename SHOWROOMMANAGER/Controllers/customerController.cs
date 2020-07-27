@@ -195,7 +195,24 @@ namespace SHOWROOMMANAGER.Controllers
 
             ViewBag.employee_id = new SelectList(db.employees, "employee_id", "employee_name");
            
-            return View("../order/Create");
+            return View();
+           
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult makeOrder([Bind(Include = "order_id,order_name,order_description,order_time,product_id,customer_id,employee_id")] order order)
+        {
+            if (ModelState.IsValid)
+            {
+                db.orders.Add(order);
+                db.SaveChanges();
+                return RedirectToAction("../order/Index");
+            }
+
+            ViewBag.customer_id = new SelectList(db.customers, "customer_id", "customer_name", order.customer_id);
+            ViewBag.employee_id = new SelectList(db.employees, "employee_id", "employee_name", order.employee_id);
+            ViewBag.product_id = new SelectList(db.products, "product_id", "product_name", order.product_id);
+            return View("../order/Index");
         }
     }
 }

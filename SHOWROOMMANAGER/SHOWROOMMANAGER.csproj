@@ -833,6 +833,7 @@
     <Content Include="Views\Client\Details.cshtml" />
     <Content Include="Views\Client\Contact.cshtml" />
     <Content Include="Views\Client\ourshowroom.cshtml" />
+    <Content Include="Views\customer\makeOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

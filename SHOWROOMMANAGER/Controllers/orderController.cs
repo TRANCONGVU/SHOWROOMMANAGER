@@ -104,6 +104,7 @@ namespace SHOWROOMMANAGER.Controllers
             ViewBag.product_id = new SelectList(db.products, "product_id", "product_name", order.product_id);
             return View(order);
         }
+                
 
         // GET: order/Edit/5
         public ActionResult Edit(int? id)
