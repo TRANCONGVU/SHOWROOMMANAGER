@@ -58,9 +58,9 @@ namespace SHOWROOMMANAGER.Controllers
             return View(customer);
         }
 
-        public ActionResult showroom()
+        public ActionResult ourshowroom()
         {
-            return View();
+                        return View();
         }
     }
 }
